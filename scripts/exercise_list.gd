@@ -3,11 +3,36 @@ extends Control
 @onready
 var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer
 var exercises: Array[Excercise]
-var exercise_data_path="res://data/Exercise.tres"
+var exercise_data_path="res://data/Exercise.json"
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	load_excercises()
+
+func save_exercises() -> void:
+	var save_file = FileAccess.open(exercise_data_path, FileAccess.WRITE)
+	for exercise in exercises:
+		
+		# Check the node has a save function.
+		if !exercise.has_method("save"):
+			print("persistent node '%s' is missing a save() function, skipped" % exercise.name)
+			continue
+		
+		# Call the node's save function.
+		var node_data = exercise.call("save")
+		# JSON provides a static method to serialized JSON string.
+		var json_string = JSON.stringify(node_data)
+		# Store the save dictionary as a new line in the save file.
+		save_file.store_line(json_string)
+	
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func load_excercises() -> void:
 	var save_file = FileAccess.open(exercise_data_path, FileAccess.READ)
 	
 	# Load the file line by line and process that dictionary to restore
@@ -38,29 +63,6 @@ func _ready() -> void:
 		
 		exercises.append(exercise)
 		print("Appended list of exercises")
-
-func save_exercises() -> void:
-	var save_file = FileAccess.open(exercise_data_path, FileAccess.WRITE)
-	for exercise in exercises:
-		
-		# Check the node has a save function.
-		if !exercise.has_method("save"):
-			print("persistent node '%s' is missing a save() function, skipped" % exercise.name)
-			continue
-		
-		# Call the node's save function.
-		var node_data = exercise.call("save")
-		# JSON provides a static method to serialized JSON string.
-		var json_string = JSON.stringify(node_data)
-		# Store the save dictionary as a new line in the save file.
-		save_file.store_line(json_string)
-	
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 
 func create_and_save_excerice_exe() -> void:
 	var exercise = Excercise.new()

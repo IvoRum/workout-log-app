@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bvgaoxetvoa14"]
+
+[ext_resource type="Script" uid="uid://cyqndr7gol3v" path="res://scripts/exercise_list.gd" id="1_bg05r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cx65"]
+bg_color = Color(0.45682454, 0.6327859, 0.68870306, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cih5q"]
+bg_color = Color(0.6, 0.6, 0.6, 0.2627451)
+
+[node name="Exercise" type="Control" unique_id=2043022317]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExerciseList" type="Control" parent="." unique_id=717620978]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+script = ExtResource("1_bg05r")
+
+[node name="Panel" type="Panel" parent="ExerciseList" unique_id=1442948939]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 190.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0cx65")
+
+[node name="MarginContainer" type="MarginContainer" parent="ExerciseList" unique_id=1178217165]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 190.0
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ExerciseList/MarginContainer" unique_id=1395782508]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SelectedExercise" type="Control" parent="." unique_id=1830461922]
+layout_mode = 1
+anchor_left = 0.165
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.08000183
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SelectedExercise" unique_id=167258211]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Panel" type="Panel" parent="SelectedExercise/MarginContainer" unique_id=2013912412]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cih5q")
