@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bvgaoxetvoa14"]
 
+[ext_resource type="Script" uid="uid://c0vpexcqw5sl5" path="res://scripts/exercise.gd" id="1_0cx65"]
 [ext_resource type="Script" uid="uid://cyqndr7gol3v" path="res://scripts/exercise_list.gd" id="1_bg05r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cx65"]
@@ -15,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0cx65")
 
 [node name="ExerciseList" type="Control" parent="." unique_id=717620978]
 layout_mode = 1
@@ -68,3 +70,25 @@ theme_override_constants/margin_bottom = 20
 [node name="Panel" type="Panel" parent="SelectedExercise/MarginContainer" unique_id=2013912412]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cih5q")
+
+[node name="TitleLabel" type="Label" parent="SelectedExercise/MarginContainer/Panel" unique_id=2024911706]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 33.0
+offset_right = 343.0
+offset_bottom = 83.0
+
+[node name="DescriptionLabel" type="Label" parent="SelectedExercise/MarginContainer/Panel" unique_id=2121043706]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 83.0
+offset_right = 87.0
+offset_bottom = 106.0
+text = "Description:"
+
+[node name="ExerciseDescriptionLabel" type="Label" parent="SelectedExercise/MarginContainer/Panel" unique_id=348881188]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 127.0
+offset_right = 380.0
+offset_bottom = 228.0
