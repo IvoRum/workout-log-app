@@ -10,6 +10,7 @@ var exercise_data_path="res://data/Exercise.json"
 func _ready() -> void:
 	load_excercises()
 
+
 func save_exercises() -> void:
 	var save_file = FileAccess.open(exercise_data_path, FileAccess.WRITE)
 	for exercise in exercises:
@@ -58,21 +59,23 @@ func load_excercises() -> void:
 		exercise.excercise_name = node_data["excercise_name"]
 		print("Created new exercise")
 		
-		var tekst = Label.new()
-		tekst.text = exercise.excercise_name
-		v_box_container.add_child(tekst)
+		add_execice_button(exercise)
 		
 		if first_entry:
-			selected_exercise_pane.get_child(0).text= exercise.excercise_name
-			selected_exercise_pane.get_child(2).text= exercise.description
+			alter_selected_exervise_data(exercise)
+			first_entry = false
 		
 		exercises.append(exercise)
 		print("Appended list of exercises")
 
-func create_and_save_excerice_exe() -> void:
+func alter_selected_exervise_data(exercise: Excercise) -> void:
+	selected_exercise_pane.get_child(0).text= exercise.excercise_name
+	selected_exercise_pane.get_child(2).text= exercise.description
+
+func create_and_save_excerice_exe2() -> void:
 	var exercise = Excercise.new()
-	exercise.description = "description"
-	exercise.excercise_name = "push up"
+	exercise.description = "description squat"
+	exercise.excercise_name = "squat"
 	print("Created new exercise")
 	
 	var tekst = Label.new()
@@ -82,3 +85,15 @@ func create_and_save_excerice_exe() -> void:
 	exercises.append(exercise)
 	print("Appended list of exercises")
 	save_exercises()
+
+func add_execice_button(exercise: Excercise) -> void:
+	var tekst = ExerciseListButton.new()
+	tekst.text = exercise.excercise_name
+	tekst.exercise_name = exercise.excercise_name
+	tekst.connect("change_exercise", _change_selected_exercise)
+	v_box_container.add_child(tekst)
+
+func _change_selected_exercise(exercise_name) -> void:
+	for i:Excercise in exercises:
+		if i.excercise_name == exercise_name:
+			alter_selected_exervise_data(i)
